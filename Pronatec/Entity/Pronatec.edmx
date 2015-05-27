@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SysPronatecModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SysPronatecModelStoreContainer">
+          <EntitySet Name="Curso" EntityType="SysPronatecModel.Store.Curso" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Endereço" EntityType="SysPronatecModel.Store.Endereço" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pessoa" EntityType="SysPronatecModel.Store.Pessoa" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FKEndereço187407" Association="SysPronatecModel.Store.FKEndereço187407">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Endereço" EntitySet="Endereço" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="IdCurso" />
+          </Key>
+          <Property Name="IdCurso" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NomeCurso" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Local" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Endereço">
+          <Key>
+            <PropertyRef Name="IDEndereco" />
+          </Key>
+          <Property Name="IDEndereco" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Rua" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Bairro" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="NumeroCasa" Type="smallint" Nullable="false" />
+          <Property Name="Complemento" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="IdPessoa" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="IDPessoa" />
+          </Key>
+          <Property Name="IDPessoa" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="CPF" Type="varchar" Nullable="false" MaxLength="11" />
+          <Property Name="DataNas" Type="date" Nullable="false" />
+          <Property Name="NomedaMae" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Cor" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <Association Name="FKEndereço187407">
+          <End Role="Pessoa" Type="SysPronatecModel.Store.Pessoa" Multiplicity="1" />
+          <End Role="Endereço" Type="SysPronatecModel.Store.Endereço" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="IDPessoa" />
+            </Principal>
+            <Dependent Role="Endereço">
+              <PropertyRef Name="IdPessoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SysPronatecModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SysPronatecEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pessoa" EntityType="SysPronatecModel.Pessoa" />
+          <EntitySet Name="Endereço" EntityType="SysPronatecModel.Endereço" />
+          <AssociationSet Name="FKEndereço187407" Association="SysPronatecModel.FKEndereço187407">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Endereço" EntitySet="Endereço" />
+          </AssociationSet>
+          <EntitySet Name="Curso" EntityType="SysPronatecModel.Curso" />
+        </EntityContainer>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="IDPessoa" />
+          </Key>
+          <Property Name="IDPessoa" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="CPF" Type="String" Nullable="false" MaxLength="11" Unicode="false" FixedLength="false" />
+          <Property Name="DataNas" Type="DateTime" Nullable="false" />
+          <Property Name="NomedaMae" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Cor" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Endereço" Relationship="SysPronatecModel.FKEndereço187407" FromRole="Pessoa" ToRole="Endereço" />
+        </EntityType>
+        <EntityType Name="Endereço">
+          <Key>
+            <PropertyRef Name="IDEndereco" />
+          </Key>
+          <Property Type="Int16" Name="IDEndereco" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Rua" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Bairro" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int16" Name="NumeroCasa" Nullable="false" />
+          <Property Type="String" Name="Complemento" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="IdPessoa" Nullable="false" />
+          <NavigationProperty Name="Pessoa" Relationship="SysPronatecModel.FKEndereço187407" FromRole="Endereço" ToRole="Pessoa" />
+        </EntityType>
+        <Association Name="FKEndereço187407">
+          <End Type="SysPronatecModel.Pessoa" Role="Pessoa" Multiplicity="1" />
+          <End Type="SysPronatecModel.Endereço" Role="Endereço" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="IDPessoa" />
+            </Principal>
+            <Dependent Role="Endereço">
+              <PropertyRef Name="IdPessoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="IdCurso" />
+          </Key>
+          <Property Type="Int16" Name="IdCurso" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NomeCurso" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Local" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SysPronatecModelStoreContainer" CdmEntityContainer="SysPronatecEntities">
+          <EntitySetMapping Name="Pessoa">
+            <EntityTypeMapping TypeName="SysPronatecModel.Pessoa">
+              <MappingFragment StoreEntitySet="Pessoa">
+                <ScalarProperty Name="IDPessoa" ColumnName="IDPessoa" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="DataNas" ColumnName="DataNas" />
+                <ScalarProperty Name="NomedaMae" ColumnName="NomedaMae" />
+                <ScalarProperty Name="Cor" ColumnName="Cor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Endereço">
+            <EntityTypeMapping TypeName="SysPronatecModel.Endereço">
+              <MappingFragment StoreEntitySet="Endereço">
+                <ScalarProperty Name="IdPessoa" ColumnName="IdPessoa" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="NumeroCasa" ColumnName="NumeroCasa" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Rua" ColumnName="Rua" />
+                <ScalarProperty Name="IDEndereco" ColumnName="IDEndereco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curso">
+            <EntityTypeMapping TypeName="SysPronatecModel.Curso">
+              <MappingFragment StoreEntitySet="Curso">
+                <ScalarProperty Name="Local" ColumnName="Local" />
+                <ScalarProperty Name="NomeCurso" ColumnName="NomeCurso" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Pronatec">
+        <EntityTypeShape EntityType="SysPronatecModel.Pessoa" Width="1.5" PointX="0.75" PointY="0.75" Height="2.172587890625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SysPronatecModel.Endereço" Width="1.5" PointX="3" PointY="5" Height="2.3648893229166674" />
+        <AssociationConnector Association="SysPronatecModel.FKEndereço187407" >
+          <ConnectorPoint PointX="1.5" PointY="3.3071907552083331" />
+          <ConnectorPoint PointX="1.5" PointY="6.1824446614583337" />
+          <ConnectorPoint PointX="3" PointY="6.1824446614583337" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SysPronatecModel.Curso" Width="1.5" PointX="3.375" PointY="0.75" Height="1.5956835937499996" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

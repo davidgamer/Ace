@@ -1,0 +1,70 @@
+﻿@model Pronatec.Entity.Pessoa
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Pessoa</legend>
+
+        @Html.HiddenFor(model => model.IDPessoa)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CPF)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CPF)
+            @Html.ValidationMessageFor(model => model.CPF)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataNas)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataNas)
+            @Html.ValidationMessageFor(model => model.DataNas)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NomedaMae)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NomedaMae)
+            @Html.ValidationMessageFor(model => model.NomedaMae)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Cor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Cor)
+            @Html.ValidationMessageFor(model => model.Cor)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Retornar", "Index")
+   
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

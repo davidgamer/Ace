@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SysPronatecModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="SysPronatecEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Pessoa" EntityType="SysPronatecModel.Pessoa" />
+    <EntitySet Name="Endereço" EntityType="SysPronatecModel.Endereço" />
+    <AssociationSet Name="FKEndereço187407" Association="SysPronatecModel.FKEndereço187407">
+      <End Role="Pessoa" EntitySet="Pessoa" />
+      <End Role="Endereço" EntitySet="Endereço" />
+    </AssociationSet>
+    <EntitySet Name="Curso" EntityType="SysPronatecModel.Curso" />
+  </EntityContainer>
+  <EntityType Name="Pessoa">
+    <Key>
+      <PropertyRef Name="IDPessoa" />
+    </Key>
+    <Property Name="IDPessoa" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+    <Property Name="CPF" Type="String" Nullable="false" MaxLength="11" Unicode="false" FixedLength="false" />
+    <Property Name="DataNas" Type="DateTime" Nullable="false" />
+    <Property Name="NomedaMae" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+    <Property Name="Cor" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Endereço" Relationship="SysPronatecModel.FKEndereço187407" FromRole="Pessoa" ToRole="Endereço" />
+  </EntityType>
+  <EntityType Name="Endereço">
+    <Key>
+      <PropertyRef Name="IDEndereco" />
+    </Key>
+    <Property Type="Int16" Name="IDEndereco" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Rua" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Bairro" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="NumeroCasa" Nullable="false" />
+    <Property Type="String" Name="Complemento" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="IdPessoa" Nullable="false" />
+    <NavigationProperty Name="Pessoa" Relationship="SysPronatecModel.FKEndereço187407" FromRole="Endereço" ToRole="Pessoa" />
+  </EntityType>
+  <Association Name="FKEndereço187407">
+    <End Type="SysPronatecModel.Pessoa" Role="Pessoa" Multiplicity="1" />
+    <End Type="SysPronatecModel.Endereço" Role="Endereço" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoa">
+        <PropertyRef Name="IDPessoa" />
+      </Principal>
+      <Dependent Role="Endereço">
+        <PropertyRef Name="IdPessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Curso">
+    <Key>
+      <PropertyRef Name="IdCurso" />
+    </Key>
+    <Property Type="Int16" Name="IdCurso" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="NomeCurso" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Local" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

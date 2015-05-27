@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SysPronatecModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="SysPronatecModelStoreContainer">
+    <EntitySet Name="Curso" EntityType="SysPronatecModel.Store.Curso" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Endereço" EntityType="SysPronatecModel.Store.Endereço" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pessoa" EntityType="SysPronatecModel.Store.Pessoa" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FKEndereço187407" Association="SysPronatecModel.Store.FKEndereço187407">
+      <End Role="Pessoa" EntitySet="Pessoa" />
+      <End Role="Endereço" EntitySet="Endereço" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Curso">
+    <Key>
+      <PropertyRef Name="IdCurso" />
+    </Key>
+    <Property Name="IdCurso" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="NomeCurso" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Local" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Endereço">
+    <Key>
+      <PropertyRef Name="IDEndereco" />
+    </Key>
+    <Property Name="IDEndereco" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Rua" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Bairro" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="NumeroCasa" Type="smallint" Nullable="false" />
+    <Property Name="Complemento" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="IdPessoa" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pessoa">
+    <Key>
+      <PropertyRef Name="IDPessoa" />
+    </Key>
+    <Property Name="IDPessoa" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="40" />
+    <Property Name="CPF" Type="varchar" Nullable="false" MaxLength="11" />
+    <Property Name="DataNas" Type="date" Nullable="false" />
+    <Property Name="NomedaMae" Type="varchar" Nullable="false" MaxLength="40" />
+    <Property Name="Cor" Type="varchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <Association Name="FKEndereço187407">
+    <End Role="Pessoa" Type="SysPronatecModel.Store.Pessoa" Multiplicity="1" />
+    <End Role="Endereço" Type="SysPronatecModel.Store.Endereço" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoa">
+        <PropertyRef Name="IDPessoa" />
+      </Principal>
+      <Dependent Role="Endereço">
+        <PropertyRef Name="IdPessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

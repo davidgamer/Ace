@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SysPronatecModelStoreContainer" CdmEntityContainer="SysPronatecEntities">
+    <EntitySetMapping Name="Pessoa">
+      <EntityTypeMapping TypeName="SysPronatecModel.Pessoa">
+        <MappingFragment StoreEntitySet="Pessoa">
+          <ScalarProperty Name="IDPessoa" ColumnName="IDPessoa" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="CPF" ColumnName="CPF" />
+          <ScalarProperty Name="DataNas" ColumnName="DataNas" />
+          <ScalarProperty Name="NomedaMae" ColumnName="NomedaMae" />
+          <ScalarProperty Name="Cor" ColumnName="Cor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Endereço">
+      <EntityTypeMapping TypeName="SysPronatecModel.Endereço">
+        <MappingFragment StoreEntitySet="Endereço">
+          <ScalarProperty Name="IdPessoa" ColumnName="IdPessoa" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="NumeroCasa" ColumnName="NumeroCasa" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Rua" ColumnName="Rua" />
+          <ScalarProperty Name="IDEndereco" ColumnName="IDEndereco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Curso">
+      <EntityTypeMapping TypeName="SysPronatecModel.Curso">
+        <MappingFragment StoreEntitySet="Curso">
+          <ScalarProperty Name="Local" ColumnName="Local" />
+          <ScalarProperty Name="NomeCurso" ColumnName="NomeCurso" />
+          <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
